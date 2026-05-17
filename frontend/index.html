@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Medicine Delivery</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>MedDeliver: Local Medicine Hub</h1>
+        <div id="user-info"></div>
+        <button id="logout-btn" style="display:none;" onclick="logout()">Logout</button>
+    </header>
+
+    <main class="container">
+        <!-- Auth Section -->
+        <section id="auth-section" class="card">
+            <h2>Login / Register</h2>
+            <input type="text" id="auth-name" placeholder="Full Name (For Registration)">
+            <input type="email" id="auth-email" placeholder="Email Address" required>
+            <input type="password" id="auth-password" placeholder="Password" required>
+            <select id="auth-role">
+                <option value="PATIENT">Patient</option>
+                <option value="CHEMIST">Chemist</option>
+                <option value="DELIVERY">Delivery Partner</option>
+            </select>
+            <div class="btn-group">
+                <button onclick="handleAuth('login')">Login</button>
+                <button onclick="handleAuth('register')">Register</button>
+            </div>
+        </section>
+
+        <!-- Patient Dashboard -->
+        <section id="patient-dashboard" class="dashboard-pane" style="display:none;">
+            <h2>Patient Dashboard</h2>
+            <div class="card">
+                <h3>Upload Prescription & Order</h3>
+                <input type="text" id="prescription-url" placeholder="Paste Image URL or Details">
+                <input type="number" id="order-chemist-id" placeholder="Chemist ID (e.g., 1, 2)">
+                <button onclick="createOrder()">Place Order</button>
+            </div>
+            <div class="card">
+                <h3>Your Orders Track Status</h3>
+                <ul id="patient-orders-list"></ul>
+            </div>
+        </section>
+
+        <!-- Chemist Dashboard -->
+        <section id="chemist-dashboard" class="dashboard-pane" style="display:none;">
+            <h2>Chemist Dashboard</h2>
+            <div class="card">
+                <h3>Manage Inventory</h3>
+                <input type="text" id="med-name" placeholder="Medicine Name">
+                <input type="number" id="med-price" placeholder="Price">
+                <input type="number" id="med-stock" placeholder="Stock">
+                <button onclick="addInventory()">Add Item</button>
+            </div>
+            <div class="card">
+                <h3>Incoming Patient Orders</h3>
+                <div id="chemist-orders-container"></div>
+            </div>
+        </section>
+
+        <!-- Delivery Partner Dashboard -->
+        <section id="delivery-dashboard" class="dashboard-pane" style="display:none;">
+            <h2>Delivery Dashboard</h2>
+            <div class="card">
+                <h3>Orders Ready for Pickup</h3>
+                <div id="delivery-orders-container"></div>
+            </div>
+        </section>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>
