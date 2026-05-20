@@ -1,6 +1,6 @@
 package com.med.delivery;
 
-import org.springframework.boot.SpringBootApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.SpringApplication;
 
 @SpringBootApplication

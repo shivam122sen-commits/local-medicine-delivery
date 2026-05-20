@@ -1,4 +1,4 @@
-package com.med.delivery;
+package com.med.delivery.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
