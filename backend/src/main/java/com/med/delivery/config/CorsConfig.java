@@ -18,7 +18,7 @@ public class CorsConfig {
 
                 registry.addMapping("/**")
                         .allowedOrigins(
-                            "https://local-medicine-delivery.vercel.app/"
+                            "https://local-medicine-delivery.vercel.app/",
                             "https://local-medicine-delivery-git-main-shivam-sen-s-projects.vercel.app"
                         )
                         .allowedMethods("*")
