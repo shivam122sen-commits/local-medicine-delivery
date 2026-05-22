@@ -16,3 +16,4 @@ public class Inventory {
     private Double price;
     private Integer stock;
 }
+
