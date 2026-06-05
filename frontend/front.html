@@ -2180,6 +2180,171 @@ footer {
      ============================================ -->
 <script>
 /* ============================================
+   BACKEND API CONFIGURATION
+   ============================================ */
+const API_CONFIG = {
+  BASE_URL: 'https://local-medicine-delivery-1.onrender.com',  // Change this for production
+  ENDPOINTS: {
+    // Authentication
+    LOGIN: '/auth/login',
+    REGISTER: '/auth/register',
+    
+    // User Management
+    USER_PROFILE: '/api/users',
+    USER_ADDRESSES: '/api/users/{userId}/addresses',
+    
+    // Dashboard
+    PATIENT_DASHBOARD: '/api/dashboard/patient',
+    CHEMIST_DASHBOARD: '/api/dashboard/chemist',
+    DELIVERY_DASHBOARD: '/api/dashboard/delivery',
+    
+    // Orders
+    CREATE_ORDER: '/api/orders/create',
+    PATIENT_ORDERS: '/api/orders/patient',
+    CHEMIST_ORDERS: '/api/orders/chemist',
+    DELIVERY_ORDERS: '/api/orders/delivery',
+    ORDER_BY_ID: '/api/orders',
+    UPDATE_ORDER_STATUS: '/api/orders/{orderId}/status',
+    
+    // Inventory
+    INVENTORY_ALL: '/api/inventory/all',
+    INVENTORY_SEARCH: '/api/inventory/search',
+    INVENTORY_CATEGORY: '/api/inventory/category',
+    INVENTORY_ADD: '/api/inventory/add',
+    CHEMIST_INVENTORY: '/api/inventory/chemist',
+    LOW_STOCK: '/api/inventory/chemist/{chemistId}/low-stock',
+    
+    // Prescriptions
+    PRESCRIPTION_UPLOAD: '/api/prescriptions/upload',
+    PRESCRIPTIONS_PENDING: '/api/prescriptions/pending',
+    PRESCRIPTION_VERIFY: '/api/prescriptions/{prescriptionId}/verify',
+    
+    // Notifications
+    USER_NOTIFICATIONS: '/api/notifications/user',
+    UNREAD_COUNT: '/api/notifications/user/{userId}/unread-count',
+    MARK_READ: '/api/notifications/{notificationId}/read',
+    MARK_ALL_READ: '/api/notifications/user/{userId}/mark-all-read',
+    
+    // Wishlist
+    WISHLIST: '/api/wishlist/user',
+    WISHLIST_ADD: '/api/wishlist/add',
+    WISHLIST_REMOVE: '/api/wishlist/user/{userId}/item/{inventoryId}'
+  }
+};
+
+/* ============================================
+   API HELPER FUNCTIONS
+   ============================================ */
+// Get stored JWT token
+function getAuthToken() {
+  return localStorage.getItem('meddyToken');
+}
+
+// Get stored user data
+function getCurrentUser() {
+  const userStr = localStorage.getItem('meddyUser');
+  return userStr ? JSON.parse(userStr) : null;
+}
+
+// Make API request with authentication
+async function apiRequest(endpoint, options = {}) {
+  const token = getAuthToken();
+  const defaultHeaders = {
+    'Content-Type': 'application/json',
+  };
+  
+  // Add Authorization header if token exists
+  if (token) {
+    defaultHeaders['Authorization'] = `Bearer ${token}`;
+  }
+  
+  const config = {
+    ...options,
+    headers: {
+      ...defaultHeaders,
+      ...options.headers
+    }
+  };
+  
+  try {
+    const response = await fetch(API_CONFIG.BASE_URL + endpoint, config);
+    
+    // Handle unauthorized
+    if (response.status === 401) {
+      localStorage.removeItem('meddyToken');
+      localStorage.removeItem('meddyUser');
+      showToast('Session expired. Please login again.', 'error');
+      showPage('landing');
+      return null;
+    }
+    
+    // Parse JSON response
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.message || 'API request failed');
+    }
+    
+    return data;
+  } catch (error) {
+    console.error('API Error:', error);
+    showToast(error.message || 'Something went wrong', 'error');
+    return null;
+  }
+}
+
+// Example API calls (uncomment to use):
+/*
+// Login
+async function login(email, password) {
+  const data = await apiRequest(API_CONFIG.ENDPOINTS.LOGIN, {
+    method: 'POST',
+    body: JSON.stringify({ email, password })
+  });
+  
+  if (data && data.token) {
+    localStorage.setItem('meddyToken', data.token);
+    localStorage.setItem('meddyUser', JSON.stringify(data.user));
+    showToast('Login successful!', 'success');
+    return true;
+  }
+  return false;
+}
+
+// Get Patient Dashboard
+async function loadPatientDashboard(patientId) {
+  const stats = await apiRequest(`${API_CONFIG.ENDPOINTS.PATIENT_DASHBOARD}/${patientId}`);
+  if (stats) {
+    // Update dashboard UI with stats
+    console.log('Dashboard stats:', stats);
+  }
+}
+
+// Get Medicines
+async function loadMedicines() {
+  const medicines = await apiRequest(API_CONFIG.ENDPOINTS.INVENTORY_ALL);
+  if (medicines) {
+    // Update medicines list
+    console.log('Medicines:', medicines);
+  }
+}
+
+// Create Order
+async function createOrder(orderData) {
+  const order = await apiRequest(API_CONFIG.ENDPOINTS.CREATE_ORDER, {
+    method: 'POST',
+    body: JSON.stringify(orderData)
+  });
+  
+  if (order) {
+    showToast('Order placed successfully!', 'success');
+    return order;
+  }
+  return null;
+}
+*/
+
+/* ============================================
    APP STATE
    ============================================ */
 const AppState = {
@@ -2187,7 +2352,8 @@ const AppState = {
   cart: [],
   wishlist: [],
   theme: localStorage.getItem('meddyTheme') || 'light',
-  currentRole: 'patient'
+  currentRole: 'patient',
+  user: getCurrentUser() // Load user from localStorage
 };
 
 /* ============================================
