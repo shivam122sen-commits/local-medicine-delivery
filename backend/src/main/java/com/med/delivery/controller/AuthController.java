@@ -1,12 +1,12 @@
 package com.med.delivery.controller;
 
-import com.med.delivery.model.User;
-import com.med.delivery.repository.UserRepository;
+import com.med.delivery.dto.AuthResponse;
+import com.med.delivery.dto.LoginRequest;
+import com.med.delivery.dto.RegisterRequest;
+import com.med.delivery.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
@@ -14,22 +14,27 @@ import java.util.Optional;
 public class AuthController {
 
     @Autowired
-    private UserRepository userRepository;
+    private AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody User user) {
-        if(userRepository.findByEmail(user.getEmail()).isPresent()) {
-            return ResponseEntity.badRequest().body("Email already exists!");
+    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
+        AuthResponse response = authService.register(request);
+        
+        if (response.getToken() == null) {
+            return ResponseEntity.badRequest().body(response);
         }
-        return ResponseEntity.ok(userRepository.save(user));
+        
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User user) {
-        Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
-        if(existingUser.isPresent() && existingUser.get().getPassword().equals(user.getPassword())) {
-            return ResponseEntity.ok(existingUser.get()); // Simple Session alternative
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
+        AuthResponse response = authService.login(request);
+        
+        if (response.getToken() == null) {
+            return ResponseEntity.status(401).body(response);
         }
-        return ResponseEntity.status(401).body("Invalid Email or Password");
+        
+        return ResponseEntity.ok(response);
     }
 }

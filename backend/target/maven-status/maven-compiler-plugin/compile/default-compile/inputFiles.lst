@@ -1,10 +1,38 @@
-/Users/shivamsen/Desktop/Medicine Delivery app/backend/src/main/java/com/med/delivery/repository/InventoryRepository.java
-/Users/shivamsen/Desktop/Medicine Delivery app/backend/src/main/java/com/med/delivery/controller/AuthController.java
-/Users/shivamsen/Desktop/Medicine Delivery app/backend/src/main/java/com/med/delivery/controller/InventoryController.java
-/Users/shivamsen/Desktop/Medicine Delivery app/backend/src/main/java/com/med/delivery/model/Inventory.java
-/Users/shivamsen/Desktop/Medicine Delivery app/backend/src/main/java/com/med/delivery/model/Order.java
-/Users/shivamsen/Desktop/Medicine Delivery app/backend/src/main/java/com/med/delivery/model/User.java
-/Users/shivamsen/Desktop/Medicine Delivery app/backend/src/main/java/com/med/delivery/MedDeliveryApplication.java
-/Users/shivamsen/Desktop/Medicine Delivery app/backend/src/main/java/com/med/delivery/repository/OrderRepository.java
-/Users/shivamsen/Desktop/Medicine Delivery app/backend/src/main/java/com/med/delivery/controller/OrderController.java
-/Users/shivamsen/Desktop/Medicine Delivery app/backend/src/main/java/com/med/delivery/repository/UserRepository.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/security/JwtUtil.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/repository/UserRepository.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/controller/NotificationController.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/config/CorsConfig.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/controller/DashboardController.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/controller/OrderController.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/repository/OrderRepository.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/repository/AddressRepository.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/model/OrderItem.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/model/Order.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/controller/PrescriptionController.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/repository/InventoryRepository.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/dto/AuthResponse.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/controller/UserController.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/model/Notification.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/controller/WishlistController.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/controller/AuthController.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/model/Address.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/dto/DashboardStats.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/repository/NotificationRepository.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/dto/LoginRequest.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/service/DashboardService.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/controller/InventoryController.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/model/Wishlist.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/repository/OrderItemRepository.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/service/OrderService.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/service/AuthService.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/service/NotificationService.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/security/SecurityConfig.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/model/Prescription.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/model/Inventory.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/repository/PrescriptionRepository.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/controller/HomeController.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/dto/RegisterRequest.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/dto/CreateOrderRequest.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/model/User.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/repository/WishlistRepository.java
+/Users/shivamsen/Desktop/Meddy/backend/src/main/java/com/med/delivery/MedDeliveryApplication.java
